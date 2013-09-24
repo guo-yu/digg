@@ -1,0 +1,26 @@
+{
+  "name": "digg",
+  "version": "0.0.0",
+  "description": "a hacker-news-like digg system based on node",
+  "logo": "http://ww3.sinaimg.cn/large/61ff0de3gw1e8xw0ygbz2j201o01oq2r.jpg",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/turingou/digg.git"
+  },
+  "keywords": [
+    "digg",
+    "hacker",
+    "maker",
+    "news",
+    "cms"
+  ],
+  "author": "turing",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/turingou/digg/issues"
+  }
+}
