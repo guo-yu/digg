@@ -1,15 +1,20 @@
 {
   "name": "digg",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "a hacker-news-like digg system based on node",
   "logo": "http://ww3.sinaimg.cn/large/61ff0de3gw1e8xw0ygbz2j201o01oq2r.jpg",
   "main": "index.js",
+  "author": "turing",
+  "license": "MIT",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/turingou/digg.git"
+  },
+  "bugs": {
+    "url": "https://github.com/turingou/digg/issues"
   },
   "keywords": [
     "digg",
@@ -18,9 +23,17 @@
     "news",
     "cms"
   ],
-  "author": "turing",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/turingou/digg/issues"
+  "dependencies": {
+    "duoshuo":"*",
+    "express": "3.3.1",
+    "jade": "*",
+    "less-middleware": "*",
+    "connect-mongo":"*",
+    "mongoose": "*",
+    "async": "*",
+    "underscore" : "*",
+    "moment": "*",
+    "marked": "*",
+    "highlight.js": "*"
   }
 }

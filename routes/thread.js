@@ -1,5 +1,4 @@
 var thread = require('../ctrlers/thread'),
-    board = require('../ctrlers/board'),
     marked = require('marked'),
     hljs = require('highlight.js');
 
@@ -10,25 +9,13 @@ marked.setOptions({
     }
 });
 
-// 简单的自增计数
-var visited = function(thread, cb) {
-    thread.views = thread.views + 1;
-    thread.save(function(err) {
-        if (!err) {
-            cb(null)
-        } else {
-            cb(err)
-        }
-    })
-}
-
 // 列出所有帖子
 exports.ls = function(req, res, next) {
-    thread.ls(function(err, ths) {
+    thread.ls(function(err, threads) {
         if (!err) {
             res.json({
                 stat: 'ok',
-                threads: ths
+                threads: threads
             })
         } else {
             next(err)
@@ -67,16 +54,14 @@ exports.read = function(req, res, next) {
     thread.read(req.params.id, function(err, t) {
         if (!err) {
             if (t) {
-                visited(t, function(err) {
-                    // 容忍无法自增浏览数的情况出现，暂时不处理error
-                    res.render('thread/index', {
-                        thread: t,
-                        marked: marked,
-                        error: err
-                    });
-                })
+                // 容忍无法自增浏览数的情况出现，暂时不处理error
+                res.render('thread/index', {
+                    thread: t,
+                    marked: marked,
+                    error: err
+                });
             } else {
-                next(new Error('404'))
+                next(new Error('404'));
             }
         } else {
             next(err)
@@ -100,6 +85,25 @@ exports.edit = function(req, res, next) {
         }
     })
 }
+
+// API：Vote
+exports.vote = function(req, res, next) {
+    if (req.body.threadID) {
+        thread.vote({
+            from: res.locals.user,
+            to: req.body.threadID
+        }, function(err, result){
+            if (!err) {
+                res.json({
+                    stat: 'ok',
+                    result: result
+                });
+            } else {
+                next(err);
+            }
+        });
+    }
+};
 
 // API：更新话题
 exports.update = function(req, res, next) {
