@@ -45,6 +45,10 @@ var threadModel = new Schema({
     name: String,
     content: String,
     url: String,
+    topic: {
+        type: String,
+        default: 'normal'
+    },
     score: {
         type: Number,
         default: 0

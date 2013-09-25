@@ -25,7 +25,6 @@ var Server = function(params) {
         user = require('./routes/user'),
         index = require('./routes/index'),
         sign = require('./routes/sign'),
-        admin = require('./routes/admin'),
         errhandler = require('./lib/error');
 
     // all environments
@@ -48,8 +47,8 @@ var Server = function(params) {
         })
     }));
     app.use(function(req, res, next) {
-        if (!res.locals.App) {
-            res.locals.App = self;
+        if (!res.locals.Server) {
+            res.locals.Server = self;
         }
         next();
     });
@@ -72,7 +71,7 @@ var Server = function(params) {
     app.get('/signout', sign.out);
 
     // thread
-    app.get('/thread/new', sign.check, thread.new);
+    app.get('/submit', sign.check, thread.submit);
     app.post('/thread/new', sign.checkJSON, thread.create);
     app.get('/thread/list', sign.checkJSON, thread.ls);
     app.get('/thread/:id', sign.passport, thread.read);
